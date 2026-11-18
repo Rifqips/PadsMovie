@@ -94,6 +94,9 @@ fun PadsMovieApp(
             val model: ReviewsViewModel = viewModel(factory = viewModelFactory { initializer { ReviewsViewModel(repository, movieId, language) } })
             ReviewsScreen(model.reviews.collectAsLazyPagingItems(), back)
         }
+        composable("account") {
+            id.application.padsmovie.account.AccountScreen(onBack = back)
+        }
         composable("about") {
             val context = LocalContext.current
             val imageLoader = remember(context) {
@@ -115,6 +118,11 @@ fun PadsMovieApp(
                         )
                     }
                     item { Text(stringResource(R.string.tmdb_notice)) }
+                    item {
+                        OutlinedButton(onClick = { navController.navigate("account") }) {
+                            Text(stringResource(AppR.string.account_title))
+                        }
+                    }
                     if (onEnableNotifications != null) item {
                         OutlinedButton(onClick = onEnableNotifications) {
                             Text(stringResource(AppR.string.enable_movie_notifications))

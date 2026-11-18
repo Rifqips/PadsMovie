@@ -29,6 +29,8 @@ Percobaan dengan satu worker dan compiler in-process juga masih mengalami kunci 
 
 ## Belum diverifikasi
 
+- **Pengingat FCM di HP fisik**. Aktifkan notifikasi dari halaman Tentang, kirim payload data dengan `movieId`, lalu ketuk notifikasi saat aplikasi terbuka, di latar belakang, dan dibuka dari kondisi tertutup. Pastikan detail menampilkan film yang dikirim.
+
 - Eksekusi tes UI: Android Studio melaporkan tidak ada perangkat aktif.
 - Pemutaran trailer YouTube nyata dan fallback ke aplikasi YouTube.
 - First load dan append saat offline pada perangkat.

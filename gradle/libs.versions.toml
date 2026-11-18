@@ -19,6 +19,7 @@ coil = "2.7.0"
 hiltCompose = "1.2.0"
 
 [libraries]
+firebase-auth = { module = "com.google.firebase:firebase-auth" }
 firebase-bom = { module = "com.google.firebase:firebase-bom", version = "34.7.0" }
 firebase-config = { module = "com.google.firebase:firebase-config" }
 firebase-messaging = { module = "com.google.firebase:firebase-messaging" }

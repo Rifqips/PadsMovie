@@ -1,0 +1,12 @@
+<resources>
+    <string name="account_title">Akun</string>
+    <string name="account_unavailable">Fitur masuk tidak tersedia di build ini.</string>
+    <string name="account_email">Alamat email</string>
+    <string name="account_password">Kata sandi</string>
+    <string name="account_sign_in">Masuk</string>
+    <string name="account_signing_in">Sedang masuk…</string>
+    <string name="account_sign_out">Keluar</string>
+    <string name="account_sign_in_error">Gagal masuk. Periksa akun, kata sandi, dan koneksi, lalu coba lagi.</string>
+    <string name="subscription_title">Langganan</string>
+    <string name="subscription_unavailable">Langganan belum tersedia.</string>
+</resources>

@@ -103,6 +103,12 @@ Kirim pesan data-only melalui FCM HTTP v1 atau Admin SDK dari lingkungan teperca
 
 Gunakan ID TMDB positif dan kirim tanpa field `notification` agar layanan aplikasi menerima dan memvalidasi payload. Saat diketuk, notifikasi membuka detail film. Pengiriman langsung bisa diuji pada HP fisik dengan aplikasi Firebase yang cocok dan izin notifikasi aktif.
 
+## Akun dan langganan
+
+Buka Tentang → Akun untuk masuk atau keluar. Aktifkan provider Email/Password di Firebase Authentication dan siapkan akun uji sebelum mencoba. Build tanpa konfigurasi Firebase yang cocok menampilkan status akun tidak tersedia. Katalog TMDB tetap terbuka untuk tamu.
+
+Layar langganan saat ini menampilkan status belum tersedia. Pembelian Google Play dan akses streaming baru dapat diaktifkan setelah paket Play Console serta verifikasi pembelian di backend terhubung.
+
 ## Atribusi
 
 This product uses the TMDB API but is not endorsed or certified by TMDB.

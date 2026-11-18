@@ -1,0 +1,12 @@
+<resources>
+    <string name="account_title">Account</string>
+    <string name="account_unavailable">Sign-in is unavailable in this build.</string>
+    <string name="account_email">Email address</string>
+    <string name="account_password">Password</string>
+    <string name="account_sign_in">Sign in</string>
+    <string name="account_signing_in">Signing in…</string>
+    <string name="account_sign_out">Sign out</string>
+    <string name="account_sign_in_error">Could not sign in. Check your credentials and connection, then try again.</string>
+    <string name="subscription_title">Subscription</string>
+    <string name="subscription_unavailable">Subscriptions are not available yet.</string>
+</resources>
