@@ -1,33 +1,33 @@
 # PadsMovie
 
-PadsMovie adalah aplikasi Android native untuk menjelajahi film dari The Movie Database (TMDB). Pengguna bisa memilih genre, membuka detail film, membaca ulasan, dan menonton trailer YouTube. Proyek ini dibuat untuk memenuhi **Mandatory Task — Option 1**.
+PadsMovie is a native Android app for exploring movies from The Movie Database (TMDB). Users can browse by genre, view movie details, read reviews, and watch YouTube trailers. The project was built for **Mandatory Task — Option 1**.
 
-**Ide, ruang lingkup, rancangan arsitektur, dan arah desain produk berasal dari pemilik proyek. Implementasi aplikasi dikerjakan sepenuhnya menggunakan Codex sebagai agen AI, di bawah arahan dan review pemilik proyek.**
+**The project owner defined the idea, scope, architecture, and product design direction. The app was implemented entirely using Codex as an AI agent, under the project owner's direction and review.**
 
-## Cakupan mandatory
+## Mandatory requirements
 
-| Poin | Implementasi |
+| Requirement | Implementation |
 | --- | --- |
-| 1. Daftar genre resmi | Layar awal menampilkan genre film dari endpoint TMDB `/genre/movie/list`. |
-| 2. Daftar film berdasarkan genre | Pilihan genre membuka grid poster dari endpoint `/discover/movie` dengan filter genre. |
-| 3. Informasi utama film | Kartu film membuka detail berisi judul, tanggal rilis, durasi, rating, sinopsis, dan gambar jika tersedia. |
-| 4. Ulasan pengguna | Tombol **Ulasan** membuka daftar ulasan untuk film yang dipilih. |
-| 5. Trailer YouTube | Detail film membuka trailer dalam aplikasi jika tersedia. Pengguna juga dapat membuka video di YouTube. |
-| 6. Endless scrolling | Paging 3 memuat halaman selanjutnya pada daftar film dan ulasan, mempertahankan item yang sudah dimuat saat terjadi error, dan menyediakan retry. |
-| 7. Kasus positif dan negatif | UI menangani loading, sukses, data kosong, serta kegagalan yang bisa dicoba lagi. Unit test mencakup pemetaan respons, autentikasi TMDB, fallback trailer, dan pagination. |
+| 1. Official movie genres | The home screen lists official TMDB movie genres from `/genre/movie/list`. |
+| 2. Discover movies by genre | Selecting a genre opens a poster grid populated from `/discover/movie` with a genre filter. |
+| 3. Primary movie information | Tapping a movie opens its details, including the title, release date, runtime, rating, synopsis, and artwork when available. |
+| 4. User reviews | The **Reviews** button opens the review list for the selected movie. |
+| 5. YouTube trailers | The detail screen opens an available trailer in the app and provides an option to open it on YouTube. |
+| 6. Endless scrolling | Paging 3 loads more movies and reviews as users scroll. If a page fails to load, previously loaded items remain visible and users can retry. |
+| 7. Positive and negative cases | The UI handles loading, success, empty results, and recoverable errors. Unit tests cover response mapping, TMDB authentication errors, trailer fallback, and pagination. |
 
-Alur utama untuk reviewer adalah **Genre → Daftar film → Detail → Ulasan atau Trailer**. Katalog dapat dibuka tanpa login. Banner Remote Config, notifikasi FCM, serta masuk dan keluar dengan Firebase Authentication adalah fitur tambahan. Layar langganan masih berupa tampilan persiapan.
+The main review flow is **Genre → Movie list → Movie details → Reviews or Trailer**. The catalog is available without signing in. Firebase Remote Config banners, FCM notifications, and Firebase Authentication are additional features. The subscription screen is a placeholder.
 
-## Arsitektur
+## Architecture
 
-PadsMovie memakai pendekatan Clean Architecture untuk katalog film, dengan pemisahan domain, sumber data, dan presentasi.
+The movie catalog follows Clean Architecture principles by separating domain contracts, data access, and presentation.
 
-| Modul | Tanggung jawab |
+| Module | Responsibility |
 | --- | --- |
-| `:core:domain` | Model domain seperti `Genre`, `MovieSummary`, dan `Page`, serta kontrak `MovieRepository`. Modul ini tidak bergantung pada Android atau Retrofit. |
-| `:core:data` | Implementasi repository TMDB, pemetaan DTO ke model domain, serta konfigurasi Retrofit dan OkHttp. Kode dipisah ke `tmdb.model`, `tmdb.network`, dan `tmdb.repository`. |
-| `:core:designsystem` | Tema Material 3 dan komponen Compose yang digunakan bersama. |
-| `:app` | Layar, ViewModel, PagingSource, navigasi, dan konfigurasi Hilt. Kode fitur dikelompokkan di `feature/<nama>`, dengan navigasi dan komponen UI bersama di package terpisah. |
+| `:core:domain` | Defines domain models such as `Genre`, `MovieSummary`, and `Page`, along with the `MovieRepository` contract. It has no dependency on Android or Retrofit. |
+| `:core:data` | Implements the TMDB repository, maps DTOs to domain models, and configures Retrofit and OkHttp. TMDB code is grouped into `tmdb.model`, `tmdb.network`, and `tmdb.repository`. |
+| `:core:designsystem` | Provides the shared Material 3 theme and reusable Compose components. |
+| `:app` | Contains screens, ViewModels, paging sources, navigation, and Hilt configuration. Feature code lives under `feature/<name>`, with separate packages for navigation and shared UI. |
 
 ```text
 :app ──► :core:domain
@@ -35,40 +35,40 @@ PadsMovie memakai pendekatan Clean Architecture untuk katalog film, dengan pemis
      └─► :core:designsystem
 ```
 
-ViewModel memanggil kontrak `MovieRepository`. Hilt menyediakan implementasi TMDB dari `:core:data`. Implementasi itu memakai `TmdbApi` dan mengubah respons API menjadi model domain sebelum data ditampilkan oleh Compose. Pemisahan ini juga memungkinkan unit test menyuntikkan repository palsu tanpa menghubungi TMDB.
+ViewModels use the `MovieRepository` contract. Hilt supplies the TMDB implementation from `:core:data`. The repository calls `TmdbApi` and converts the results to domain models for the UI. Unit tests can inject a fake repository without calling TMDB.
 
 ## Tech stack
 
-- **UI** — Kotlin, Jetpack Compose, Material 3, Navigation Compose, dan Coil.
-- **State dan pagination** — Jetpack ViewModel, Kotlin Coroutines, Flow, dan Paging 3.
-- **Networking dan DI** — Retrofit, OkHttp, Gson, Dagger Hilt, dan KSP.
-- **Layanan tambahan** — Firebase Remote Config, Cloud Messaging, dan Authentication.
-- **Build dan tes** — Gradle Kotlin DSL, version catalog, JUnit, MockWebServer, Compose UI Test, dan GitHub Actions.
+- **UI** — Kotlin, Jetpack Compose, Material 3, Navigation Compose, and Coil.
+- **State and pagination** — Jetpack ViewModel, Kotlin Coroutines, Flow, and Paging 3.
+- **Networking and dependency injection** — Retrofit, OkHttp, Gson, Dagger Hilt, and KSP.
+- **Additional services** — Firebase Remote Config, Cloud Messaging, and Authentication.
+- **Build and testing** — Gradle Kotlin DSL, a Gradle version catalog, JUnit, MockWebServer, Compose UI Test, and GitHub Actions.
 
-## Menjalankan proyek
+## Getting started
 
-1. Clone repo dan buka folder proyek di Android Studio. Gunakan JDK 17 dan Android SDK 36. Aplikasi mendukung Android 8.1 (API 27) ke atas.
-2. Siapkan **TMDB API Read Access Token** dan set `TMDB_READ_ACCESS_TOKEN` di Gradle properties pengguna. Di Windows, file ini biasanya berada di `%USERPROFILE%\.gradle\gradle.properties`. Gunakan token milik sendiri dan simpan di luar repo.
+1. Clone the repository and open it in Android Studio Rabit 2. Use JDK 17 and Android SDK 36. The app supports Android 8.1 (API 27) and later.
+2. Get your own **TMDB API Read Access Token** and set `TMDB_READ_ACCESS_TOKEN` in your user-level Gradle properties file. On Windows, this file is typically at `%USERPROFILE%\.gradle\gradle.properties`. Keep your token outside the repository.
 
    ```properties
    TMDB_READ_ACCESS_TOKEN=your_read_access_token
    ```
-3. Jalankan Gradle Sync. Pilih `developmentDebug` di **Build Variants**, lalu gunakan **Run** dengan HP fisik atau emulator. Konfigurasi Firebase yang disertakan cocok untuk application ID production. Katalog TMDB tetap dapat dipakai di development tanpa Firebase.
+3. Run Gradle Sync, select `developmentDebug` under **Build Variants**, and run the app on a physical device or emulator. The bundled Firebase configuration matches the production application ID. The TMDB catalog works in development builds without Firebase.
 
-Build, unit test, dan lint dapat dijalankan tanpa perangkat:
+Run the build, unit tests, and lint without a device:
 
 ```powershell
 .\gradlew.bat :app:assembleDevelopmentDebug :app:testDevelopmentDebugUnitTest :core:data:test :app:lintDevelopmentDebug
 ```
 
-Tes Compose memerlukan perangkat terhubung:
+Run Compose UI tests on a connected device or emulator:
 
 ```powershell
 .\gradlew.bat :app:connectedDevelopmentDebugAndroidTest
 ```
 
-Build, unit test, lint, dan kompilasi APK tes Android sudah diverifikasi selama pengembangan. Sebelum penyerahan, coba pemuatan halaman kedua untuk film dan ulasan, putar trailer nyata, serta cek retry setelah koneksi dipulihkan. Untuk fitur tambahan, verifikasi juga bahwa ketukan notifikasi FCM membuka detail film yang tepat di HP fisik.
+Builds, unit tests, lint, and Android test APK compilation were verified during development. Device checks are still pending for real trailer playback, second-page loading for movies and reviews, and retry after reconnecting. The optional FCM flow also needs a physical-device check to confirm that tapping a notification opens the correct movie.
 
-## Atribusi
+## Attribution
 
 This product uses the TMDB API but is not endorsed or certified by TMDB.
