@@ -9,35 +9,17 @@ import com.padsmovie.core.domain.model.Trailer
 import com.padsmovie.core.domain.repository.MovieCatalogAuthException
 import com.padsmovie.core.domain.repository.MovieCatalogAuthException.Reason
 import com.padsmovie.core.domain.repository.MovieRepository
-import okhttp3.OkHttpClient
 import retrofit2.HttpException
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-
-private const val TMDB_BASE_URL = "https://api.themoviedb.org/3/"
 
 fun createTmdbMovieRepository(readAccessToken: String): MovieRepository =
     createTmdbMovieRepository(readAccessToken, TMDB_BASE_URL)
 
 internal fun createTmdbMovieRepository(readAccessToken: String, baseUrl: String): MovieRepository {
     val token = readAccessToken.trim()
-    val client = OkHttpClient.Builder()
-        .addInterceptor { chain ->
-            val request = chain.request().newBuilder()
-                .header("Authorization", "Bearer $token")
-                .build()
-            chain.proceed(request)
-        }
-        .build()
-
-    val api = Retrofit.Builder()
-        .baseUrl(baseUrl)
-        .client(client)
-        .addConverterFactory(GsonConverterFactory.create())
-        .build()
-        .create(TmdbApi::class.java)
-
-    return TmdbMovieRepository(api, hasReadAccessToken = token.isNotEmpty())
+    return TmdbMovieRepository(
+        api = TmdbNetwork.createApi(token, baseUrl),
+        hasReadAccessToken = token.isNotEmpty(),
+    )
 }
 
 private class TmdbMovieRepository(
