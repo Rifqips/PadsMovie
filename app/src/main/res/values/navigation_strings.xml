@@ -1,0 +1,13 @@
+<resources>
+    <string name="tmdb_logo_url" translatable="false">https://www.themoviedb.org/assets/2/v4/logos/v2/blue_long_2-9665a76b1ae401a510ec1e0ca40ddcb3b0cfe45f1d51b77a308fea0845885648.svg</string>
+    <string name="route_genres" translatable="false">genres</string>
+    <string name="route_account" translatable="false">account</string>
+    <string name="route_about" translatable="false">about</string>
+    <string name="route_movies" translatable="false">movies/%1$s?name=%2$s</string>
+    <string name="route_detail" translatable="false">detail/%1$s</string>
+    <string name="route_reviews" translatable="false">reviews/%1$s</string>
+    <string name="nav_arg_genre_id" translatable="false">genreId</string>
+    <string name="nav_arg_movie_id" translatable="false">movieId</string>
+    <string name="nav_arg_genre_name" translatable="false">name</string>
+    <string name="nav_arg_placeholder" translatable="false">{%1$s}</string>
+</resources>
