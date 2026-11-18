@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">PadsMovie</string>
+    <string name="genres">Temukan film berikutnya</string>
+    <string name="genres_hint">Pilih genre untuk mulai menjelajah</string>
+    <string name="movies">Film</string>
+    <string name="detail">Detail film</string>
+    <string name="reviews">Ulasan</string>
+    <string name="trailer">Tonton trailer</string>
+    <string name="about">Tentang</string>
+    <string name="back">Kembali</string>
+    <string name="retry">Coba lagi</string>
+    <string name="load_error">Data belum bisa dimuat. Periksa koneksi lalu coba lagi.</string>
+    <string name="missing_token">Tambahkan TMDB_READ_ACCESS_TOKEN ke Gradle properties lokal, lalu build ulang aplikasi.</string>
+    <string name="rejected_token">Token akses ditolak TMDB. Periksa token lalu build ulang aplikasi.</string>
+    <string name="empty_genres">Belum ada genre yang tersedia.</string>
+    <string name="empty_movies">Belum ada film untuk genre ini.</string>
+    <string name="empty_reviews">Belum ada ulasan untuk film ini.</string>
+    <string name="empty_trailer">Trailer film ini belum tersedia.</string>
+    <string name="empty_overview">Sinopsis belum tersedia.</string>
+    <string name="poster_unavailable">Poster tidak tersedia</string>
+    <string name="runtime">%1$d menit</string>
+    <string name="rating">Rating: %1$s / 10</string>
+    <string name="release_date">Tanggal rilis: %1$s</string>
+    <string name="open_youtube">Buka di YouTube</string>
+    <string name="trailer_playback_error">Jika trailer tidak bisa diputar di sini, buka melalui YouTube.</string>
+    <string name="no_video_app">Tidak ada aplikasi untuk membuka video ini.</string>
+    <string name="about_description">Temukan film, baca ulasan, dan tonton trailer. Metadata serta gambar film disediakan oleh TMDB.</string>
+</resources>

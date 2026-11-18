@@ -1,0 +1,7 @@
+<resources>
+    <string name="movie_notifications">Kabar film</string>
+    <string name="notification_movie_body">Ketuk untuk melihat detail film.</string>
+    <string name="enable_movie_notifications">Aktifkan notifikasi film</string>
+    <string name="notification_subscribed">Notifikasi film sudah aktif.</string>
+    <string name="notification_subscription_failed">Notifikasi film belum bisa diaktifkan. Coba lagi.</string>
+</resources>
