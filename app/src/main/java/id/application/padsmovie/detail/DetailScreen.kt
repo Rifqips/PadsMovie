@@ -1,6 +1,13 @@
 package id.application.padsmovie.detail
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.width
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.PlayArrow
+import androidx.compose.material3.Icon
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
@@ -52,8 +59,8 @@ fun DetailScreen(
                 is UiState.Error -> item { ContentState(errorMessage(detail.cause), onRetry = onRetryDetail) }
                 is UiState.Success -> {
                     val movie = detail.data
-                    item { MovieArtwork(movie.backdropPath ?: movie.posterPath, Modifier.fillMaxWidth().aspectRatio(16f / 9f)) }
-                    item { Text(movie.title, style = MaterialTheme.typography.headlineMedium) }
+                    item { MovieArtwork(movie.backdropPath ?: movie.posterPath, Modifier.fillMaxWidth().aspectRatio(16f / 9f).clip(MaterialTheme.shapes.large)) }
+                    item { Text(movie.title, style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold) }
                     if (movie.releaseDate.isNotBlank()) item {
                         val date = runCatching {
                             LocalDate.parse(movie.releaseDate).format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM))
@@ -73,7 +80,11 @@ fun DetailScreen(
                             is UiState.Success -> if (trailer.data == null) {
                                 ContentState(stringResource(R.string.empty_trailer))
                             } else {
-                                Button(onClick = { showTrailer = true }, modifier = Modifier.fillMaxWidth()) { Text(stringResource(R.string.trailer)) }
+                                Button(onClick = { showTrailer = true }, modifier = Modifier.fillMaxWidth()) {
+                                    Icon(Icons.Default.PlayArrow, contentDescription = null)
+                                    Spacer(Modifier.width(8.dp))
+                                    Text(stringResource(R.string.trailer))
+                                }
                             }
                         }
                     }

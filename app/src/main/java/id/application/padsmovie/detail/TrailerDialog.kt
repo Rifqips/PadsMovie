@@ -13,7 +13,16 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Row
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Close
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -70,8 +79,23 @@ fun TrailerDialog(trailer: Trailer, onDismiss: () -> Unit) {
         }
     }
     Dialog(onDismissRequest = onDismiss) {
-        Surface {
-            Column(Modifier.verticalScroll(rememberScrollState()).padding(16.dp)) {
+        Surface(shape = MaterialTheme.shapes.extraLarge) {
+            Column(
+                Modifier.verticalScroll(rememberScrollState()).padding(16.dp),
+                verticalArrangement = Arrangement.spacedBy(12.dp),
+            ) {
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Text(
+                        trailer.name,
+                        modifier = Modifier.weight(1f),
+                        style = MaterialTheme.typography.titleMedium,
+                        maxLines = 2,
+                        overflow = TextOverflow.Ellipsis,
+                    )
+                    IconButton(onClick = onDismiss) {
+                        Icon(Icons.Default.Close, contentDescription = stringResource(android.R.string.cancel))
+                    }
+                }
                 AndroidView(factory = { webView }, modifier = Modifier.fillMaxWidth().height(220.dp))
                 Text(stringResource(R.string.trailer_playback_error))
                 TextButton(onClick = {
@@ -81,7 +105,6 @@ fun TrailerDialog(trailer: Trailer, onDismiss: () -> Unit) {
                         Toast.makeText(context, R.string.no_video_app, Toast.LENGTH_SHORT).show()
                     }
                 }) { Text(stringResource(R.string.open_youtube)) }
-                TextButton(onClick = onDismiss) { Text(stringResource(R.string.back)) }
             }
         }
     }
