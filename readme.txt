@@ -4,8 +4,10 @@ Rencana pengembangan Android dan alur kerja GitHub
 PadsMovie adalah konsep aplikasi Android untuk menemukan film berdasarkan
 genre, melihat detail, membaca ulasan, dan menonton trailer YouTube. Versi
 pertama memenuhi tujuh poin take-home dengan data dari TMDB. Dokumen ini
-dipakai sebelum membuat project di Android Studio. Semua checklist masih
-terbuka dan diisi setelah hasilnya bisa dicoba.
+menjadi roadmap pengembangan. Setup dan arsitektur aktual tersedia di README.md.
+Kode alur Phase 1 sudah ditambahkan. Checklist di bawah tetap menjadi panduan
+verifikasi; pengujian perangkat dan persiapan submission harus diselesaikan
+sebelum menandai seluruh milestone selesai.
 
 ALUR DAN DESAIN
 
