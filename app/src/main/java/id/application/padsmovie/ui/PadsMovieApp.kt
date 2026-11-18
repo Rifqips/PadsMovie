@@ -33,6 +33,7 @@ import androidx.paging.compose.collectAsLazyPagingItems
 import coil.compose.AsyncImage
 import com.padsmovie.core.designsystem.R
 import com.padsmovie.core.domain.repository.MovieRepository
+import id.application.padsmovie.account.AccountScreen
 import id.application.padsmovie.detail.DetailScreen
 import id.application.padsmovie.detail.DetailViewModel
 import id.application.padsmovie.genres.GenresScreen
@@ -95,7 +96,7 @@ fun PadsMovieApp(
             ReviewsScreen(model.reviews.collectAsLazyPagingItems(), back)
         }
         composable("account") {
-            id.application.padsmovie.account.AccountScreen(onBack = back)
+            AccountScreen(onBack = back)
         }
         composable("about") {
             val context = LocalContext.current
