@@ -66,7 +66,8 @@ fun PadsMovieApp(
     val genreIdPlaceholder = stringResource(AppR.string.nav_arg_placeholder, genreIdArg)
     val movieIdPlaceholder = stringResource(AppR.string.nav_arg_placeholder, movieIdArg)
     val genreNamePlaceholder = stringResource(AppR.string.nav_arg_placeholder, genreNameArg)
-    val moviesPattern = stringResource(AppR.string.route_movies, genreIdPlaceholder, genreNamePlaceholder)
+    val moviesPattern =
+        stringResource(AppR.string.route_movies, genreIdPlaceholder, genreNamePlaceholder)
     val detailPattern = stringResource(AppR.string.route_detail, movieIdPlaceholder)
     val reviewsPattern = stringResource(AppR.string.route_reviews, movieIdPlaceholder)
 
@@ -87,12 +88,23 @@ fun PadsMovieApp(
                 onRetry = model::retry,
                 onGenre = { genre ->
                     navController.navigate(
-                        context.getString(AppR.string.route_movies, genre.id.toString(), Uri.encode(genre.name))
+                        context.getString(
+                            AppR.string.route_movies,
+                            genre.id.toString(),
+                            Uri.encode(genre.name)
+                        )
                     )
                 },
                 onAbout = { navController.navigate(aboutRoute) },
                 banner = banner,
-                onPromoMovie = { navController.navigate(context.getString(AppR.string.route_detail, it.toString())) },
+                onPromoMovie = {
+                    navController.navigate(
+                        context.getString(
+                            AppR.string.route_detail,
+                            it.toString()
+                        )
+                    )
+                },
             )
         }
         composable(
@@ -111,7 +123,12 @@ fun PadsMovieApp(
                 entry.arguments?.getString(genreNameArg).orEmpty(),
                 model.movies.collectAsLazyPagingItems(),
                 {
-                    navController.navigate(context.getString(AppR.string.route_detail, it.toString()))
+                    navController.navigate(
+                        context.getString(
+                            AppR.string.route_detail,
+                            it.toString()
+                        )
+                    )
                 },
                 back
             )
@@ -133,7 +150,12 @@ fun PadsMovieApp(
             val detail by model.detail.collectAsStateWithLifecycle()
             val trailer by model.trailer.collectAsStateWithLifecycle()
             DetailScreen(detail, trailer, model::retryDetail, model::retryTrailer, {
-                navController.navigate(context.getString(AppR.string.route_reviews, movieId.toString()))
+                navController.navigate(
+                    context.getString(
+                        AppR.string.route_reviews,
+                        movieId.toString()
+                    )
+                )
             }, back)
         }
         composable(
@@ -203,7 +225,11 @@ fun PadsMovieApp(
     }
     LaunchedEffect(notificationMovieId) {
         if (notificationMovieId != null) {
-            navController.navigate(context.getString(AppR.string.route_detail, notificationMovieId.toString())) { launchSingleTop = true }
+            navController.navigate(
+                context.getString(
+                    AppR.string.route_detail, notificationMovieId.toString()
+                )
+            ) { launchSingleTop = true }
             onNotificationOpened()
         }
     }
