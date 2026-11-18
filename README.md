@@ -2,7 +2,7 @@
 
 PadsMovie is a native Android app for exploring movies from The Movie Database (TMDB). Users can browse by genre, view movie details, read reviews, and watch YouTube trailers. The project was built for **Mandatory Task — Option 1**.
 
-**The project owner defined the idea, scope, architecture, and product design direction. The app was implemented entirely using Codex as an AI agent, under the project owner's direction and review.**
+**The project owner @rifqipadisiliwangi  defined the idea, scope, architecture, and product design direction. The app was implemented entirely using Codex as an AI agent, under the project owner's direction and review.**
 
 ## Mandatory requirements
 
