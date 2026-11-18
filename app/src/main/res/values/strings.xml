@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">PadsMovie</string>
+    <string name="app_name" translatable="false">PadsMovie</string>
     <string name="movie_notifications">Movie updates</string>
     <string name="notification_movie_body">Tap to see the movie details.</string>
     <string name="enable_movie_notifications">Enable movie notifications</string>
