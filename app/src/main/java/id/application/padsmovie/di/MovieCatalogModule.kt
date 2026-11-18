@@ -1,6 +1,6 @@
 package id.application.padsmovie.di
 
-import com.padsmovie.core.data.tmdb.createTmdbMovieRepository
+import com.padsmovie.core.data.tmdb.repository.createTmdbMovieRepository
 import com.padsmovie.core.domain.repository.MovieRepository
 import dagger.Module
 import dagger.Provides

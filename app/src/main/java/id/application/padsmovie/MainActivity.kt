@@ -18,13 +18,13 @@ import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
 import com.google.firebase.FirebaseApp
 import com.google.firebase.messaging.FirebaseMessaging
-import com.padsmovie.core.designsystem.PadsMovieTheme
+import com.padsmovie.core.designsystem.theme.PadsMovieTheme
 import com.padsmovie.core.domain.repository.MovieRepository
 import dagger.hilt.android.AndroidEntryPoint
-import id.application.padsmovie.notifications.MOVIE_ID
-import id.application.padsmovie.notifications.MOVIE_TOPIC
-import id.application.padsmovie.notifications.movieIdFrom
-import id.application.padsmovie.ui.PadsMovieApp
+import id.application.padsmovie.feature.notifications.MOVIE_ID
+import id.application.padsmovie.feature.notifications.MOVIE_TOPIC
+import id.application.padsmovie.feature.notifications.movieIdFrom
+import id.application.padsmovie.navigation.PadsMovieApp
 import javax.inject.Inject
 
 @AndroidEntryPoint

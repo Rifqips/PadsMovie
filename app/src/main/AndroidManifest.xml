@@ -16,7 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PadsMovie">
         <service
-            android:name=".notifications.MovieMessagingService"
+            android:name=".feature.notifications.MovieMessagingService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
