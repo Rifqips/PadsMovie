@@ -112,6 +112,7 @@ kotlin {
 dependencies {
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.config)
+    implementation(libs.firebase.messaging)
     implementation(project(":core:designsystem"))
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.paging.runtime)

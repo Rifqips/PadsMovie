@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">PadsMovie</string>
+    <string name="movie_notifications">Movie updates</string>
+    <string name="notification_movie_body">Tap to see the movie details.</string>
+    <string name="enable_movie_notifications">Enable movie notifications</string>
+    <string name="notification_subscribed">Movie notifications are enabled.</string>
+    <string name="notification_subscription_failed">Could not enable movie notifications. Try again.</string>
 </resources>

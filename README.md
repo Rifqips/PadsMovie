@@ -75,13 +75,33 @@ Pilih `developmentDebug` di panel Build Variants untuk pengembangan harian. Kedu
 
 ## Pengembangan berikutnya
 
-Roadmap lengkap tersedia di [readme.txt](readme.txt). Notifikasi FCM, autentikasi, billing, backend verifikasi langganan, dan streaming masih menjadi milestone berikutnya.
+Roadmap lengkap tersedia di [readme.txt](readme.txt). Autentikasi, billing, backend verifikasi langganan, dan streaming masih menjadi milestone berikutnya.
 
 ## Banner Remote Config
 
 Gradle membaca `app/src/<flavor>/google-services.json` atau `app/google-services.json`. Client harus cocok dengan Application ID varian. Varian tanpa client yang cocok menampilkan katalog tanpa banner.
 
 Di Firebase Remote Config, siapkan parameter `banner_enabled` (Boolean, default false), `banner_title` (String), `banner_image_url` (URL HTTPS), dan `banner_movie_id` (Number, ID TMDB positif). Aktifkan banner setelah semua nilai terisi. Ketika layar genre dibuka, aplikasi membaca konfigurasi aktif lalu mencoba mengambil konfigurasi terbaru. Jika fetch gagal, konfigurasi aktif terakhir masih dapat dipakai.
+
+## Notifikasi film
+
+Di build dengan konfigurasi Firebase, buka Tentang lalu pilih Aktifkan notifikasi film. Aplikasi meminta izin jika diperlukan dan mendaftar ke topik `movie-updates`.
+
+Kirim pesan data-only melalui FCM HTTP v1 atau Admin SDK dari lingkungan tepercaya. Contoh isi `message` untuk topik tersebut:
+
+```json
+{
+  "topic": "movie-updates",
+  "data": {
+    "movieId": "550",
+    "title": "Pilihan film hari ini",
+    "body": "Ketuk untuk melihat detail."
+  },
+  "android": { "priority": "HIGH" }
+}
+```
+
+Gunakan ID TMDB positif dan kirim tanpa field `notification` agar layanan aplikasi menerima dan memvalidasi payload. Saat diketuk, notifikasi membuka detail film. Pengiriman langsung bisa diuji pada HP fisik dengan aplikasi Firebase yang cocok dan izin notifikasi aktif.
 
 ## Atribusi
 

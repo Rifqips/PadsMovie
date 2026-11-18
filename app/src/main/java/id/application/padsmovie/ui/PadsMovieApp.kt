@@ -9,6 +9,9 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.material3.OutlinedButton
+import id.application.padsmovie.R as AppR
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
@@ -42,7 +45,12 @@ import id.application.padsmovie.reviews.ReviewsViewModel
 import java.util.Locale
 
 @Composable
-fun PadsMovieApp(repository: MovieRepository) {
+fun PadsMovieApp(
+    repository: MovieRepository,
+    notificationMovieId: Int? = null,
+    onNotificationOpened: () -> Unit = {},
+    onEnableNotifications: (() -> Unit)? = null,
+) {
     val navController = rememberNavController()
     val language = Locale.getDefault().toLanguageTag()
     val back: () -> Unit = { navController.popBackStack() }
@@ -107,8 +115,19 @@ fun PadsMovieApp(repository: MovieRepository) {
                         )
                     }
                     item { Text(stringResource(R.string.tmdb_notice)) }
+                    if (onEnableNotifications != null) item {
+                        OutlinedButton(onClick = onEnableNotifications) {
+                            Text(stringResource(AppR.string.enable_movie_notifications))
+                        }
+                    }
                 }
             }
+        }
+    }
+    LaunchedEffect(notificationMovieId) {
+        if (notificationMovieId != null) {
+            navController.navigate("detail/$notificationMovieId") { launchSingleTop = true }
+            onNotificationOpened()
         }
     }
 }
