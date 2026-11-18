@@ -19,6 +19,8 @@ coil = "2.7.0"
 hiltCompose = "1.2.0"
 
 [libraries]
+firebase-bom = { module = "com.google.firebase:firebase-bom", version = "34.7.0" }
+firebase-config = { module = "com.google.firebase:firebase-config" }
 androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigation" }
 androidx-paging-runtime = { module = "androidx.paging:paging-runtime", version.ref = "paging" }
 androidx-paging-compose = { module = "androidx.paging:paging-compose", version.ref = "paging" }

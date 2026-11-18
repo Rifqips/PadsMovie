@@ -18,6 +18,31 @@ val tmdbReadAccessToken = providers.gradleProperty("TMDB_READ_ACCESS_TOKEN")
             .replace("\n", "\\n")
     }
 
+fun readFirebaseOptions(flavor: String, packageName: String): Map<String, String> {
+    val files = listOf("src/$flavor/google-services.json", "google-services.json")
+    for (path in files) {
+        val file = layout.projectDirectory.file(path)
+        val content = providers.fileContents(file).asText.orNull ?: continue
+        val config = groovy.json.JsonSlurper().parseText(content) as Map<*, *>
+        val project = config["project_info"] as Map<*, *>
+        for (entry in config["client"] as List<*>) {
+            val client = entry as Map<*, *>
+            val info = client["client_info"] as Map<*, *>
+            val androidInfo = info["android_client_info"] as? Map<*, *>
+            if (androidInfo?.get("package_name") != packageName) continue
+
+            val apiKey = (client["api_key"] as List<*>).first() as Map<*, *>
+            return mapOf(
+                "google_app_id" to (info["mobilesdk_app_id"] as String),
+                "google_api_key" to (apiKey["current_key"] as String),
+                "project_id" to (project["project_id"] as String),
+                "gcm_defaultSenderId" to (project["project_number"] as String),
+            )
+        }
+    }
+    return emptyMap()
+}
+
 android {
     namespace = "id.application.padsmovie"
     compileSdk {
@@ -33,6 +58,30 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField("String", "TMDB_READ_ACCESS_TOKEN", "\"${tmdbReadAccessToken.get()}\"")
+    }
+
+    flavorDimensions += "environment"
+    productFlavors {
+        create("development") {
+            dimension = "environment"
+            applicationIdSuffix = ".dev"
+            versionNameSuffix = "-dev"
+        }
+        create("staging") {
+            dimension = "environment"
+            applicationIdSuffix = ".staging"
+            versionNameSuffix = "-staging"
+        }
+        create("production") {
+            dimension = "environment"
+        }
+    }
+
+    productFlavors.configureEach {
+        val packageName = "id.application.padsmovie" + applicationIdSuffix.orEmpty()
+        readFirebaseOptions(name, packageName).forEach { (key, value) ->
+            resValue("string", key, value)
+        }
     }
 
     buildTypes {
@@ -61,6 +110,8 @@ kotlin {
 }
 
 dependencies {
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.config)
     implementation(project(":core:designsystem"))
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.paging.runtime)

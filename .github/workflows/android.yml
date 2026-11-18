@@ -20,7 +20,7 @@ jobs:
       - uses: android-actions/setup-android@v3
       - uses: gradle/actions/setup-gradle@v4
       - name: Build, lint, and unit tests
-        run: bash gradlew :app:assembleDebug :app:lintDebug :app:testDebugUnitTest :core:data:test --console=plain
+        run: bash gradlew :app:assembleDevelopmentDebug :app:assembleStagingRelease :app:assembleProductionRelease :app:lintDevelopmentDebug :app:testDevelopmentDebugUnitTest :core:data:test --console=plain
       - uses: actions/upload-artifact@v4
         if: always()
         with:

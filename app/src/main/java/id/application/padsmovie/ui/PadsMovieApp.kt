@@ -34,6 +34,7 @@ import id.application.padsmovie.detail.DetailScreen
 import id.application.padsmovie.detail.DetailViewModel
 import id.application.padsmovie.genres.GenresScreen
 import id.application.padsmovie.genres.GenresViewModel
+import id.application.padsmovie.genres.rememberPromoBanner
 import id.application.padsmovie.movies.MoviesScreen
 import id.application.padsmovie.movies.MoviesViewModel
 import id.application.padsmovie.reviews.ReviewsScreen
@@ -49,9 +50,17 @@ fun PadsMovieApp(repository: MovieRepository) {
         composable("genres") {
             val model: GenresViewModel = viewModel(factory = viewModelFactory { initializer { GenresViewModel(repository, language) } })
             val state by model.state.collectAsStateWithLifecycle()
-            GenresScreen(state, model::retry, { genre ->
-                navController.navigate("movies/${genre.id}?name=${Uri.encode(genre.name)}")
-            }, { navController.navigate("about") })
+            val banner = rememberPromoBanner()
+            GenresScreen(
+                state = state,
+                onRetry = model::retry,
+                onGenre = { genre ->
+                    navController.navigate("movies/${genre.id}?name=${Uri.encode(genre.name)}")
+                },
+                onAbout = { navController.navigate("about") },
+                banner = banner,
+                onPromoMovie = { navController.navigate("detail/$it") },
+            )
         }
         composable("movies/{genreId}?name={name}", arguments = listOf(
             navArgument("genreId") { type = NavType.IntType },

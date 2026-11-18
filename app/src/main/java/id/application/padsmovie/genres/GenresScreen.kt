@@ -29,7 +29,14 @@ import id.application.padsmovie.ui.UiState
 import id.application.padsmovie.ui.errorMessage
 
 @Composable
-fun GenresScreen(state: UiState<List<Genre>>, onRetry: () -> Unit, onGenre: (Genre) -> Unit, onAbout: () -> Unit) {
+internal fun GenresScreen(
+    state: UiState<List<Genre>>,
+    onRetry: () -> Unit,
+    onGenre: (Genre) -> Unit,
+    onAbout: () -> Unit,
+    banner: PromoBanner? = null,
+    onPromoMovie: (Int) -> Unit = {},
+) {
     ScreenScaffold(
         title = stringResource(R.string.app_name),
         actions = { TextButton(onClick = onAbout) { Text(stringResource(R.string.about)) } },
@@ -46,6 +53,9 @@ fun GenresScreen(state: UiState<List<Genre>>, onRetry: () -> Unit, onGenre: (Gen
                     Text(stringResource(R.string.genres), style = MaterialTheme.typography.headlineMedium)
                     Text(stringResource(R.string.genres_hint), style = MaterialTheme.typography.bodyLarge)
                 }
+            }
+            if (banner != null) {
+                item(span = { GridItemSpan(maxLineSpan) }) { PromoBannerCard(banner, onPromoMovie) }
             }
             when (state) {
                 UiState.Loading -> item(span = { GridItemSpan(maxLineSpan) }) { ContentState(loading = true) }

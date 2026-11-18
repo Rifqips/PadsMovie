@@ -46,8 +46,8 @@ Aplikasi mengambil data langsung dari jaringan, tanpa cache database atau mode o
 Windows:
 
 ```powershell
-.\gradlew.bat :app:assembleDebug :app:lintDebug :app:testDebugUnitTest :core:data:test
-.\gradlew.bat :app:connectedDebugAndroidTest
+.\gradlew.bat :app:assembleDevelopmentDebug :app:lintDevelopmentDebug :app:testDevelopmentDebugUnitTest :core:data:test
+.\gradlew.bat :app:connectedDevelopmentDebugAndroidTest
 ```
 
 Perintah kedua membutuhkan emulator atau perangkat terhubung. Unit test dan tes UI memakai data palsu atau MockWebServer, sehingga tidak memerlukan token TMDB. Workflow Android checks menjalankan build, lint dan unit test untuk pull request.
@@ -63,9 +63,25 @@ Pemeriksaan manual sebelum submission:
 - Putar trailer nyata; periksa fallback YouTube dan penghentian playback saat aplikasi masuk background.
 - Coba tema gelap, bahasa Indonesia/Inggris, rotasi, dan font sistem besar.
 
+## Varian build
+
+| Varian | Application ID |
+| --- | --- |
+| `developmentDebug` | `id.application.padsmovie.dev` |
+| `stagingRelease` | `id.application.padsmovie.staging` |
+| `productionRelease` | `id.application.padsmovie` |
+
+Pilih `developmentDebug` di panel Build Variants untuk pengembangan harian. Kedua varian release belum dikonfigurasi dengan signing key.
+
 ## Pengembangan berikutnya
 
-Roadmap lengkap tetap tersedia di [readme.txt](readme.txt). Flavors, Firebase Remote Config/FCM, autentikasi, billing, backend verifikasi langganan, dan streaming merupakan Phase 2 setelah verifikasi submission. Konfigurasi layanan serta sumber video belum disertakan.
+Roadmap lengkap tersedia di [readme.txt](readme.txt). Notifikasi FCM, autentikasi, billing, backend verifikasi langganan, dan streaming masih menjadi milestone berikutnya.
+
+## Banner Remote Config
+
+Gradle membaca `app/src/<flavor>/google-services.json` atau `app/google-services.json`. Client harus cocok dengan Application ID varian. Varian tanpa client yang cocok menampilkan katalog tanpa banner.
+
+Di Firebase Remote Config, siapkan parameter `banner_enabled` (Boolean, default false), `banner_title` (String), `banner_image_url` (URL HTTPS), dan `banner_movie_id` (Number, ID TMDB positif). Aktifkan banner setelah semua nilai terisi. Ketika layar genre dibuka, aplikasi membaca konfigurasi aktif lalu mencoba mengambil konfigurasi terbaru. Jika fetch gagal, konfigurasi aktif terakhir masih dapat dipakai.
 
 ## Atribusi
 
