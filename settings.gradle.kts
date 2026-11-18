@@ -21,3 +21,6 @@ dependencyResolutionManagement {
 
 rootProject.name = "PadsMovie"
 include(":app")
+include(":core:domain")
+include(":core:data")
+include(":core:designsystem")

@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">PadsMovie</string>
+    <string name="genres">Discover your next movie</string>
+    <string name="genres_hint">Choose a genre to get started</string>
+    <string name="movies">Movies</string>
+    <string name="detail">Movie details</string>
+    <string name="reviews">Reviews</string>
+    <string name="trailer">Watch trailer</string>
+    <string name="about">About</string>
+    <string name="back">Back</string>
+    <string name="retry">Try again</string>
+    <string name="load_error">Could not load data. Check your connection and try again.</string>
+    <string name="missing_token">Add TMDB_READ_ACCESS_TOKEN to your local Gradle properties, then rebuild the app.</string>
+    <string name="rejected_token">TMDB rejected the access token. Check your token and rebuild the app.</string>
+    <string name="empty_genres">No genres available.</string>
+    <string name="empty_movies">No movies in this genre yet.</string>
+    <string name="empty_reviews">No reviews for this movie yet.</string>
+    <string name="empty_trailer">No trailer available for this movie.</string>
+    <string name="empty_overview">No synopsis available.</string>
+    <string name="poster_unavailable">Poster unavailable</string>
+    <string name="runtime">%1$d minutes</string>
+    <string name="rating">Rating: %1$s / 10</string>
+    <string name="release_date">Release date: %1$s</string>
+    <string name="open_youtube">Open in YouTube</string>
+    <string name="trailer_playback_error">If the trailer cannot play here, open it in YouTube.</string>
+    <string name="no_video_app">No application can open this video.</string>
+    <string name="tmdb_notice" translatable="false">This product uses the TMDB API but is not endorsed or certified by TMDB.</string>
+    <string name="tmdb_logo" translatable="false">The Movie Database</string>
+    <string name="about_description">Discover movies, read reviews, and watch trailers. Movie metadata and images are provided by TMDB.</string>
+</resources>
